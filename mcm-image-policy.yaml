@@ -1,0 +1,9 @@
+apiVersion: securityenforcement.admission.cloud.ibm.com/v1beta1
+kind: ClusterImagePolicy
+metadata:
+  name: ibmcloud-default-cluster-image-policy
+spec:
+ repositories:
+  # allow all images
+  - name: "*"
+    policy:
