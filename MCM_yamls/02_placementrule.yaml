@@ -1,0 +1,16 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: demo-tradr-placementrule
+  namespace: demo-mcm-resources
+  generation: 1
+  labels:
+    purpose: demo-tradr
+spec:
+  clusterConditions:
+    - type: ManagedClusterConditionAvailable
+      status: "True"
+  clusterReplicas: 1
+  clusterSelector:
+    matchLabels:
+      environment: dev
