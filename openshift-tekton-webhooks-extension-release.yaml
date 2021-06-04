@@ -336,7 +336,7 @@ spec:
         - name: WEB_RESOURCES_DIR
           value: web
         - name: WEBHOOK_CALLBACK_URL
-          value: https://el-tekton-webhooks-eventlistener-openshift-pipelines.playgrowth-mcm-ge228k-8946bbc006b7c6eb0829d088919818bb-0000.eu-gb.containers.appdomain.cloud
+          value: https://tekton-webhooks-eventlistener-openshift-pipelines.apps.vapo-ppd.va.gov
         - name: PLATFORM
           value: openshift
         - name: SSL_VERIFICATION_ENABLED
@@ -559,51 +559,39 @@ spec:
   params:
   - description: The pull request url
     name: pullrequesturl
-    type: string
   - description: The statuses url
     name: statusesurl
-    type: string
   - default: github-secrets
     description: The git secret name
     name: gitsecretname
-    type: string
   - default: token
     description: The git secret key name
     name: gitsecretkeyname
-    type: string
   - default: Success
     description: The text of the success comment
     name: commentsuccess
-    type: string
   - default: Failed
     description: The text of the failure comment
     name: commentfailure
-    type: string
   - default: Unknown
     description: The text of the timeout comment
     name: commenttimeout
-    type: string
   - default: Missing
     description: The text of the missing comment
     name: commentmissing
-    type: string
   - default: http://localhost:9097/
     description: The URL to the pipelineruns page of the dashboard
     name: dashboardurl
-    type: string
   - default: github
     description: The git provider, "github" or "gitlab"
     name: provider
-    type: string
   - default: ""
     description: The git api URL for the repository
     name: apiurl
-    type: string
   - default: "false"
     description: Whether or not to skip SSL validation of certificates ("true" or
       "false")
     name: insecure-skip-tls-verify
-    type: string
   resourcetemplates:
   - apiVersion: tekton.dev/v1alpha1
     kind: PipelineResource
