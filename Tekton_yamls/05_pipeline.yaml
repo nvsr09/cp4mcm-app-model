@@ -1,0 +1,44 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: build-and-deploy-pipeline-tradr
+spec:
+  resources:
+    - name: git-source-tradr
+      type: git
+    - name: docker-image-tradr
+      type: image
+  params:
+    - name: pathToYamlFile
+      description: The path to the yaml file to deploy within the git source
+      default: "k8s_yamls"
+    - name: pathToDeployablesFile
+      description: The path to the deployable file to deploy within the git sour
+ce
+      default: "k8s_yamls_mcm"
+  tasks:
+  - name: build-task
+    resources:
+      inputs:
+        - name: git-source-tradr
+          resource: git-source-tradr
+        - name: docker-image-tradr
+          resource: docker-image-tradr
+    taskRef:
+      name: tradr-build-task
+  - name: deploy-task
+    params:
+      - name: pathToYamlFile
+        value:  "$(params.pathToYamlFile)"
+      - name: pathToDeployablesFile
+        value:  "$(params.pathToDeployablesFile)"
+    resources:
+      inputs:
+        - name: git-source-tradr
+          resource: git-source-tradr
+        - name: docker-image-tradr
+          resource: docker-image-tradr
+    runAfter:
+      - build-task
+    taskRef:
+      name: tradr-deploy-task
