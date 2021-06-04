@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+  name: tradr-pr
+spec:
+  pipelineRef:
+    name: build-and-deploy-pipeline-tradr
+  resources:
+    - name: git-source-tradr
+      resourceRef:
+        name: git-source-tradr
+    - name: docker-image-tradr
+      resourceRef:
+        name: docker-image-tradr
+  params:
+    - name: pathToYamlFile
+      value: "k8s_yamls"
+    - name: pathToDeployablesFile
+      value: "k8s_yamls_mcm"
+  serviceAccountName: pipeline-account
+  timeout: "1h0m0s"
