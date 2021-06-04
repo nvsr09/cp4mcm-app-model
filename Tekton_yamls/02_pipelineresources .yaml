@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1alpha1
+  kind: PipelineResource
+  metadata:
+    name: docker-image-tradr
+  spec:
+    params:
+    - name: url
+      value: quay.vapo.va.gov/oitctxnamalv/tradr
+    type: image
+---
+  apiVersion: tekton.dev/v1alpha1
+  kind: PipelineResource
+  metadata:
+    name: git-source-tradr
+  spec:
+    params:
+    - name: url
+      value: https://github.com/nvsr09/motherload
+    - name: insecureSkipVerify
+      value: 'true'
+    type: git
