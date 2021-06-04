@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: tradr-build-taskrun
+spec:
+  serviceAccountName: pipeline-account
+  taskRef:
+    name: tradr-build-task
+  inputs:
+    resources:
+      - name: git-source-tradr
+        resourceRef:
+          name: git-source-tradr
+      - name: docker-image-tradr
+        resourceRef:
+            name: docker-image-tradr
+    params:
+    - name: BUILDER_IMAGE
+      value: "quay.io/buildah/stable:v1.12.0"
+    - name: DOCKERFILE
+      value: ./Dockerfile
+    - name: CONTEXT
+      value: .
+    - name: TLSVERIFY
+      value: "false"
